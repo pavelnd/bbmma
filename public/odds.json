@@ -1,0 +1,19 @@
+{
+  "__comment": "Живой файл коэффициентов. Сайт читает его при каждой загрузке. Обновляйте значения — пересборка не нужна. Неизвестные ключи игнорируются, значения должны быть > 1. Ключи: fon.* — Fonbet (Спорт → Единоборства → UFC), win.* — Winline (MMA → UFC), olimp.* — Olimpbet (Единоборства → UFC).",
+  "updatedAt": "2026-10-13T12:00:00+03:00",
+  "sources": [
+    { "bookie": "fonbet", "url": "https://fon.bet", "section": "Спорт → Единоборства → UFC" },
+    { "bookie": "winline", "url": "https://winline.ru", "section": "MMA → UFC" },
+    { "bookie": "olimpbet", "url": "https://olimp.bet", "section": "Единоборства → UFC" }
+  ],
+  "odds": {
+    "fon.p1": 2.03,
+    "fon.x": 49.0,
+    "fon.p2": 1.82,
+    "win.p1": 1.94,
+    "win.p2": 1.77,
+    "olimp.p1": 2.14,
+    "olimp.x": 50.0,
+    "olimp.p2": 1.76
+  }
+}

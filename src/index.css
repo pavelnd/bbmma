@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Unbounded", system-ui, sans-serif;
+  --font-body: "Manrope", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-ink: #06070b;
+  --color-carbon: #0c0d13;
+  --color-panel: #12131b;
+  --color-panel2: #171923;
+  --color-line: rgba(255, 255, 255, 0.07);
+  --color-fon: #ff2e3f;
+  --color-fon-deep: #b3121f;
+  --color-blu: #2f7bff;
+  --color-blu-deep: #123f9e;
+  --color-gold: #f2b84b;
+  --color-mist: #9aa3b5;
+
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-pulse-dot: pulseDot 1.6s ease-in-out infinite;
+  --animate-flicker: flicker 5s linear infinite;
+  --animate-float-slow: floatSlow 9s ease-in-out infinite;
+  --animate-shine: shine 3.2s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 46, 63, 0.55); }
+  50% { opacity: 0.65; box-shadow: 0 0 0 7px rgba(255, 46, 63, 0); }
+}
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  41% { opacity: 1; }
+  42% { opacity: 0.72; }
+  43% { opacity: 1; }
+  47% { opacity: 0.85; }
+  48% { opacity: 1; }
+}
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes shine {
+  from { background-position: -200% center; }
+  to { background-position: 200% center; }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ink);
+  color: #f2f4f8;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-fon);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0b10;
+}
+::-webkit-scrollbar-thumb {
+  background: #23262f;
+  border-radius: 8px;
+  border: 2px solid #0a0b10;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3e4c;
+}
+
+/* ---------- utilities ---------- */
+
+.font-display { font-family: var(--font-display); }
+.font-mono { font-family: var(--font-mono); tabular-nums: lining-nums; font-variant-numeric: tabular-nums; }
+
+.font-600 { font-weight: 600; }
+.font-700 { font-weight: 700; }
+.font-800 { font-weight: 800; }
+.font-900 { font-weight: 900; }
+
+.text-stroke {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.16);
+  color: transparent;
+}
+.text-stroke-fon {
+  -webkit-text-stroke: 1.5px rgba(255, 46, 63, 0.45);
+  color: transparent;
+}
+
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.32'/%3E%3C/svg%3E");
+}
+
+.card-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.card-sheen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.07) 48%, rgba(255, 255, 255, 0.12) 52%, transparent 70%);
+  background-size: 250% 250%;
+  background-position: -200% center;
+  pointer-events: none;
+  transition: background-position 0.9s ease;
+}
+.card-sheen:hover::before {
+  background-position: 200% center;
+}
+
+.gold-text {
+  background: linear-gradient(100deg, #f6d789 10%, #f2b84b 40%, #fff2c9 55%, #d99a2b 75%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: var(--animate-shine);
+}
+
+/* 3d flip */
+.flip-scene {
+  perspective: 1600px;
+}
+.flip-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.flip-scene:hover .flip-inner,
+.flip-scene.flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+/* octagon clip */
+.oct-clip {
+  clip-path: polygon(29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%);
+}
+
+/* octagon lines background */
+.octagon-bg {
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgba(255, 46, 63, 0.08), transparent 60%),
+    radial-gradient(ellipse 90% 60% at 50% 100%, rgba(47, 123, 255, 0.07), transparent 60%);
+}
+
+/* vertical text */
+.v-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
